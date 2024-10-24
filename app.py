@@ -6,11 +6,41 @@ import json
 from flask_httpauth import HTTPBasicAuth
 
 auth = HTTPBasicAuth()
+"""
+Verifies the username and password for basic authentication.
+
+Parameters:
+username (str): The username provided by the client.
+password (str): The password provided by the client.
+
+Returns:
+str: The username if the credentials are valid, otherwise None.
+"""
+@auth.verify_password
+def verify_password(username, password):
+    if username in USERS and USERS[username] == password:
+        return username
+    return None
 
 USERS ={
     "admin":"secret",
     "user":"password"
 }
+"""
+Verifies the username and password for basic authentication.
+
+Parameters:
+username (str): The username provided by the client.
+password (str): The password provided by the client.
+
+Returns:
+str: The username if the credentials are valid, otherwise None.
+"""
+@auth.verify_password
+def verify_password(username, password):
+    if username in USERS and USERS[username] == password:
+        return username
+    return None
 
 @auth.verify_password
 def verify_password(username, password):
@@ -29,6 +59,7 @@ def home():
     return "Hello, Flask!"
 
 @app.route('/scrape/producao', methods=['GET'])
+
 @auth.login_required
 def scrape_producao():
     url = 'http://vitibrasil.cnpuv.embrapa.br/index.php?opcao=opt_02'
@@ -95,4 +126,3 @@ def create_items():
 
 if __name__ == '__main__':
     app.run(debug=True)
-    
