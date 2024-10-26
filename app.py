@@ -61,6 +61,21 @@ def home():
 @app.route('/scrape/producao', methods=['GET'])
 @auth.login_required
 def scrape_producao():
+
+    """
+    Scrape data about production.
+    ---
+    tags:
+      - Scraping
+    responses:
+      200:
+        description: A JSON list with the production data scraped.
+      400:
+        description: URL is required.
+      500:
+        description: Error scraping data.
+    """
+
     url = 'https://web.archive.org/web/20201203223441/http://vitibrasil.cnpuv.embrapa.br/index.php?opcao=opt_02'
     if not url:
         return jsonify({"error": "URL é obrigatória"}), 400
@@ -89,6 +104,21 @@ def scrape_producao():
 @app.route('/scrape/comercializacao', methods=['GET'])
 @auth.login_required
 def scrape_comercializacao():
+
+    """
+    Scrape data about commercialization.
+    ---
+    tags:
+      - Scraping
+    responses:
+      200:
+        description: A JSON list with the commercialization data scraped.
+      400:
+        description: URL is required.
+      500:
+        description: Error scraping data.
+    """
+
     url = 'https://web.archive.org/web/20201203231003/http://vitibrasil.cnpuv.embrapa.br/index.php?opcao=opt_04'
     if not url:
         return jsonify({"error": "URL é obrigatória"}), 400
@@ -117,6 +147,27 @@ def scrape_comercializacao():
 @app.route('/scrape/importacao/<tipo>', methods=['GET'])
 @auth.login_required
 def scrape_importacao(tipo):
+
+    """
+    Scrape data about importation.
+    ---
+    tags:
+      - Scraping
+    parameters:
+      - name: tipo
+        in: path
+        type: string
+        required: true
+        description: Type of importation (vinho_de_mesa, espumantes, uvas_frescas, uvas_passas, suco_de_uva).
+    responses:
+      200:
+        description: A JSON list with the importation data scraped.
+      400:
+        description: Invalid type of importation.
+      500:
+        description: Error scraping data.
+    """
+
     vinho_de_mesa = 'http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_01&opcao=opt_05'
     espumantes = 'http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_02&opcao=opt_05'
     uvas_frescas = 'http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_03&opcao=opt_05'
@@ -219,6 +270,21 @@ def scrape_importacao(tipo):
 @app.route('/scrape/processamento/<tipo_p>', methods=['GET'])
 @auth.login_required
 def scrape_processamento(tipo_p):
+
+    """
+    Scrape data about processing.
+    ---
+    tags:
+      - Scraping
+    responses:
+      200:
+        description: A JSON list with the processing data scraped.
+      400:
+        description: URL is required.
+      500:
+        description: Error scraping data.
+    """
+
     viniferas = 'http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_01&opcao=opt_03'
     americanas_hibri = 'http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_02&opcao=opt_03'
     uvas_mesa = 'http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_03&opcao=opt_03'
@@ -303,6 +369,27 @@ def scrape_processamento(tipo_p):
 @app.route('/scrape/exportacao/<tipo_e>', methods=['GET'])
 @auth.login_required
 def scrape_exportacao(tipo_e):
+
+    """
+    Scrape data about exportation.
+    ---
+    tags:
+      - Scraping
+    parameters:
+      - name: tipo_e
+        in: path
+        type: string
+        required: true
+        description: Type of exportation (vinho_de_mesa, espumantes, uvas_frescas, suco_de_uva).
+    responses:
+      200:
+        description: A JSON list with the exportation data scraped.
+      400:
+        description: Invalid type of exportation.
+      500:
+        description: Error scraping data.
+    """
+
     vinho_de_mesa = 'http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_01&opcao=opt_06'
     espumantes = 'http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_02&opcao=opt_06'
     uvas_frescas = 'http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_03&opcao=opt_06'
