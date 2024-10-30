@@ -1,0 +1,5 @@
+Flask==2.3.3
+requests==2.31.0
+beautifulsoup4==4.12.2
+flasgger==0.9.5
+flask_httpauth==4.7.0

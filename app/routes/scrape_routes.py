@@ -1,62 +1,7 @@
-from flask import Flask, request, jsonify
+from flask import jsonify
+from app import app, auth
 import requests
-from flasgger import Swagger
 from bs4 import BeautifulSoup
-import json
-from flask_httpauth import HTTPBasicAuth
-
-auth = HTTPBasicAuth()
-"""
-Verifies the username and password for basic authentication.
-
-Parameters:
-username (str): The username provided by the client.
-password (str): The password provided by the client.
-
-Returns:
-str: The username if the credentials are valid, otherwise None.
-"""
-@auth.verify_password
-def verify_password(username, password):
-    if username in USERS and USERS[username] == password:
-        return username
-    return None
-
-USERS ={
-    "admin":"secret",
-    "user":"password"
-}
-"""
-Verifies the username and password for basic authentication.
-
-Parameters:
-username (str): The username provided by the client.
-password (str): The password provided by the client.
-
-Returns:
-str: The username if the credentials are valid, otherwise None.
-"""
-@auth.verify_password
-def verify_password(username, password):
-    if username in USERS and USERS[username] == password:
-        return username
-    return None
-
-@auth.verify_password
-def verify_password(username, password):
-    if username in USERS and USERS[username] == password:
-        return username
-    return None
-
-app = Flask(__name__)
-Swagger(app)
-
-items =[]
-
-
-@app.route('/')
-def home():
-    return "Hello, Flask!"
 
 @app.route('/scrape/producao', methods=['GET'])
 @auth.login_required
@@ -158,7 +103,7 @@ def scrape_importacao(tipo):
         in: path
         type: string
         required: true
-        description: Type of importation (vinho_de_mesa, espumantes, uvas_frescas, uvas_passas, suco_de_uva).
+        description: Type of importation (vinho_de_mesa, espumantes, uvas_frescas, uvas_passas, suco_de_uva, data_ano).
     responses:
       200:
         description: A JSON list with the importation data scraped.
@@ -173,7 +118,7 @@ def scrape_importacao(tipo):
     uvas_frescas = 'http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_03&opcao=opt_05'
     uvas_passas = 'http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_04&opcao=opt_05'
     suco_de_uva = 'http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_05&opcao=opt_05'
-    if tipo not in ['vinho_de_mesa', 'espumantes', 'uvas_frescas', 'uvas_passas', 'suco_de_uva']:
+    if tipo not in ['vinho_de_mesa', 'espumantes', 'uvas_frescas', 'uvas_passas', 'suco_de_uva', 'data_ano']:
         return jsonify({'error': 'Tipo de importação inválido'}), 400
     match tipo:
         case  "vinho_de_mesa":
@@ -263,7 +208,6 @@ def scrape_importacao(tipo):
                 cells = row.find_all('td')
                 item_data = {headers[i]: cell.get_text(strip=True) for i, cell in enumerate(cells)}
                 data.append(item_data)
-
 
             return jsonify(data)
                
@@ -469,6 +413,3 @@ def scrape_exportacao(tipo_e):
 
 
             return jsonify(data)
-
-if __name__ == '__main__':
-    app.run(debug=True)
