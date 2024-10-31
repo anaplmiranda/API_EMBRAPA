@@ -2,16 +2,26 @@ from flask import jsonify
 from app import app, auth
 import requests
 from bs4 import BeautifulSoup
+from app.auth_jwt import token_creator, token_verify
 
 @app.route('/scrape/producao', methods=['GET'])
-@auth.login_required
-def scrape_producao():
-
+@token_verify
+def scrape_producao(token):
+    
     """
     Scrape data about production.
     ---
     tags:
-      - Scraping
+      - Embrapa API
+    parameters:
+      - name: Authorization
+        in: header
+        type: string
+        required: true
+      - name: uid
+        in: header
+        type: integer
+        required: true                           
     responses:
       200:
         description: A JSON list with the production data scraped.
@@ -41,23 +51,32 @@ def scrape_producao():
             data.append(item_data)
 
 
-        return jsonify(data)
+        return jsonify({'dados':data,'token':token})
     except  Exception as e: 
         return  jsonify({"error": str(e)}), 500
 
 
 @app.route('/scrape/comercializacao', methods=['GET'])
-@auth.login_required
-def scrape_comercializacao():
+@token_verify
+def scrape_comercializacao(token):
 
     """
-    Scrape data about commercialization.
+    Scrape data about production.
     ---
     tags:
-      - Scraping
+      - Embrapa API
+    parameters:
+      - name: Authorization
+        in: header
+        type: string
+        required: true
+      - name: uid
+        in: header
+        type: integer
+        required: true                           
     responses:
       200:
-        description: A JSON list with the commercialization data scraped.
+        description: A JSON list with the production data scraped.
       400:
         description: URL is required.
       500:
@@ -90,15 +109,23 @@ def scrape_comercializacao():
 
 
 @app.route('/scrape/importacao/<tipo>', methods=['GET'])
-@auth.login_required
-def scrape_importacao(tipo):
+@token_verify
+def scrape_importacao(token, tipo):
 
     """
     Scrape data about importation.
     ---
     tags:
-      - Scraping
+      - Embrapa API
     parameters:
+      - name: Authorization
+        in: header
+        type: string
+        required: true
+      - name: uid
+        in: header
+        type: integer
+        required: true    
       - name: tipo
         in: path
         type: string
@@ -212,14 +239,28 @@ def scrape_importacao(tipo):
             return jsonify(data)
                
 @app.route('/scrape/processamento/<tipo_p>', methods=['GET'])
-@auth.login_required
-def scrape_processamento(tipo_p):
+@token_verify
+def scrape_processamento(token, tipo_p):
 
     """
     Scrape data about processing.
     ---
     tags:
-      - Scraping
+      - Embrapa API
+    parameters:
+      - name: Authorization
+        in: header
+        type: string
+        required: true
+      - name: uid
+        in: header
+        type: integer
+        required: true 
+      - name: tipo_p
+        in: path
+        type: string
+        required: true
+        description: Type of importation (viniferas, americanas_hibri, uvas_mesa, sem_classificacao).      
     responses:
       200:
         description: A JSON list with the processing data scraped.
@@ -309,17 +350,24 @@ def scrape_processamento(tipo_p):
 
             return jsonify(data)
 
-
 @app.route('/scrape/exportacao/<tipo_e>', methods=['GET'])
-@auth.login_required
-def scrape_exportacao(tipo_e):
+@token_verify
+def scrape_exportacao(token, tipo_e):
 
     """
     Scrape data about exportation.
     ---
     tags:
-      - Scraping
+      - Embrapa API
     parameters:
+      - name: Authorization
+        in: header
+        type: string
+        required: true
+      - name: uid
+        in: header
+        type: integer
+        required: true 
       - name: tipo_e
         in: path
         type: string
@@ -413,3 +461,24 @@ def scrape_exportacao(tipo_e):
 
 
             return jsonify(data)
+        
+@app.route('/auth', methods=['POST'])
+def authorization_route():
+    """
+    Token generator
+    ---
+    tags:
+      - Embrapa API     
+    responses:
+      200:
+        description: A JSON list with the production data scraped.
+      400:
+        description: URL is required.
+      500:
+        description: Error scraping data.
+    """    
+
+    token = token_creator.create(uid=12)
+    return jsonify({
+        'token': token
+    }),200     

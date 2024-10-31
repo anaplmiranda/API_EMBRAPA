@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flasgger import Swagger
 from flask_httpauth import HTTPBasicAuth
 
+
 auth = HTTPBasicAuth()
 
 app = Flask(__name__)
