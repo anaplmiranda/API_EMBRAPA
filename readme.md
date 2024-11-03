@@ -13,19 +13,20 @@ A API tem como objetivo fornecer uma interface pública para acesso aos dados, q
 ## Funcionalidades
 - Endpoints para consultar dados de Produção, Processamento, Comercialização, Importação e Exportação.
 - Documentação da API usando Swagger.
-- Autenticação ???
+- Autenticação JWT
+- scraping de dados
 - Deploy em ambiente de nuvem ?????
 - Base de código com suporte para instalação e execução local.
 
 ## Tecnologias Utilizadas
 - Python 3.x
 - Flask (framework para a API)
-- BeautifulSoup, Scrapy ou Selenium (scraping de dados)  ????
+- BeautifulSoup (scraping de dados)  
 - Swagger (documentação)
-- JWT (autenticação) ????
+- JWT (autenticação)
 - Docker (containerização)
 - Banco de dados: MongoDB ou PostgreSQL ????
-- Plataforma de Deploy: AWS, Heroku, ????
+- Plataforma de Deploy: AWS
 
 ## Instalação e Execução Local
 ### Pré-requisitos
