@@ -81,8 +81,9 @@ API_EMBRAPA-MAIN/
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/seu-usuario/API_EMBRAPA-MAIN.git
-cd API_EMBRAPA-MAIN
+
+git clone https://github.com/anaplmiranda/API_EMBRAPA.git
+cd API_EMBRAPA
 ```
 
 2. Crie e ative um ambiente virtual:
