@@ -25,10 +25,10 @@ A API tem como objetivo fornecer uma interface pública para acesso aos dados, q
 - Swagger (documentação)
 - JWT (autenticação)
 - Docker (containerização)
-- Banco de dados: MongoDB ou PostgreSQL ????
 - Plataforma de Deploy: AWS
 
 ## Instalação e Execução Local
 ### Pré-requisitos
 - Python 3.x instalado
 - Git instalado
+- 
