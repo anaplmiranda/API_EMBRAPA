@@ -130,14 +130,14 @@ python run.py
 ## 🌐 Endpoints
 
 ### Autenticação
-- `POST /auth/token`: Gera token JWT de acesso
+- `POST /auth`: Gera token JWT de acesso
 
 ### Dados
-- `GET /api/producao`: Dados de produção
-- `GET /api/processamento`: Dados de processamento
-- `GET /api/comercializacao`: Dados de comercialização
-- `GET /api/importacao`: Dados de importação
-- `GET /api/exportacao`: Dados de exportação
+- `GET /scrape/producao`: Dados de produção
+- `GET /scrape/processamento`: Dados de processamento
+- `GET /scrape/comercializacao`: Dados de comercialização
+- `GET /scrape/importacao`: Dados de importação
+- `GET /scrape/exportacao`: Dados de exportação
 
 ## 🔐 Autenticação
 
@@ -147,6 +147,7 @@ A API utiliza autenticação JWT (JSON Web Tokens). Para acessar os endpoints pr
 2. Inclua o token no header das requisições:
 ```
 Authorization: Bearer <seu-token>
+uid: ID único e intrasferivel do usuário
 ```
 
 Exemplo de uso:
@@ -159,6 +160,7 @@ curl -X POST http://localhost:5000/auth/token \
 # Acessando endpoint protegido
 curl -X GET http://localhost:5000/api/producao \
   -H "Authorization: Bearer seu_token_aqui"
+  -d "ud: insira o ID do usuário"
 ```
 
 
