@@ -59,20 +59,12 @@ API_EMBRAPA-MAIN/
 ```
 
 ## 📁 Documentacao
+
+```
 Swagger: http://54.233.14.210:5000/apidocs/
 Deploy: http://54.233.14.210
 Server: AWS Server
 
-```
-API_EMBRAPA-MAIN/
-├── app/
-│   ├── auth_jwt/              # Módulo de autenticação JWT
-│   ├── config/               # Configurações da aplicação
-│   ├── routes/               # Rotas da API
-│   └── utils/                # Utilitários e helpers
-├── env/                      # Ambiente virtual Python
-├── requirements.txt          # Dependências do projeto
-└── run.py                    # Arquivo de inicialização
 ```
 
 
