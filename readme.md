@@ -28,6 +28,7 @@ A API tem como objetivo fornecer uma interface pública para acesso aos dados da
 ## 📋 Sumário
 - [Visão Geral](#visão-geral)
 - [Estrutura do Projeto](#estrutura-do-projeto)
+- [Documentacao](#documentacao)
 - [Tecnologias](#tecnologias)
 - [Instalação](#instalação)
 - [Uso](#uso)
@@ -57,6 +58,24 @@ API_EMBRAPA-MAIN/
 └── run.py                    # Arquivo de inicialização
 ```
 
+## 📁 Documentacao
+Swagger: http://54.233.14.210:5000/apidocs/
+Deploy: http://54.233.14.210
+Server: AWS Server
+
+```
+API_EMBRAPA-MAIN/
+├── app/
+│   ├── auth_jwt/              # Módulo de autenticação JWT
+│   ├── config/               # Configurações da aplicação
+│   ├── routes/               # Rotas da API
+│   └── utils/                # Utilitários e helpers
+├── env/                      # Ambiente virtual Python
+├── requirements.txt          # Dependências do projeto
+└── run.py                    # Arquivo de inicialização
+```
+
+
 ## 🛠 Tecnologias
 
 ### Core
@@ -82,8 +101,8 @@ API_EMBRAPA-MAIN/
 1. Clone o repositório:
 ```bash
 
-git clone https://github.com/anaplmiranda/API_EMBRAPA.git
-cd API_EMBRAPA
+git clone https://github.com/anaplmiranda/API_EMBRAPA.git #windows
+cd API_EMBRAPA #windows
 ```
 
 2. Crie e ative um ambiente virtual:
@@ -92,6 +111,10 @@ python -m venv env
 source env/bin/activate  # Linux/MacOS
 # ou
 .\env\Scripts\activate  # Windows
+
+(no Windows): Se você estiver usando o PowerShell, talvez seja necessário permitir scripts para que ele consiga ativar o ambiente virtual. Execute o seguinte comando no PowerShell com permissão de administrador:
+powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 3. Instale as dependências:
@@ -147,3 +170,4 @@ curl -X GET http://localhost:5000/api/producao \
 ```
 
 
+#Revisão Documento Ricardo Mororo v3 04-11-2024
